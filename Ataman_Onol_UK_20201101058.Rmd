@@ -1,0 +1,81 @@
+---
+title: "Final Ödevi"
+author: "Ataman Önol ÜK"
+date: "2023-02-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+```
+
+# Oyun Şirketlerinin Karşılaştırılması
+## İçerik
+  - En Çok Satış Yapan Oyun Şirketi
+  - En Çok Rağbet Alan Oyunlar
+  - Peki Hangisi En İyisi?
+  
+### En Çok Satış Yapan Oyun Şirketi
+Aşağıdaki tabloda en çok bilinen oyun şirketleri ve yıllık piyasa değerleri verilmiştir.
+
+```{r s_p, include=FALSE}
+sp <- data.frame('Şirketler'= c("Microsoft", "Tensent", "Sony", "Activision Blizzard","Nintendo") , 'Yıllık.Gelir'= c(1890000,570250,1248000,689850,500565))
+
+sp
+```
+
+Bu tablodan yola çıkarak şirketlerin yıllık piyasa değerlerini grafikte gösterelim;
+
+```{r sp}
+library(ggplot2)
+ ggplot(sp, aes(x = Şirketler, y = Yıllık.Gelir , col="blue"))+
+  geom_col()+
+  labs(
+   title = "Şirketlerin Yıllık Gelirleri",
+   x = "Şirketler",
+   y = "Piyasa Değeri"
+    )
+```    
+----
+Grafikten de görüldüğü üzere Microsoft ve Sony diğer şirketlere büyük farklar atmış durumdalar.Bu iki şirketin kendi oyun konsolları olan "XBOX" ve "PLAYSTATION" karşılaştırılarak hangi şirket daha başarılı yorumlama yapabiliriz.
+
+## En Çok Rağbet Alan Oyunlar
+İki farklı şirketin en beğenilen oyunları ve beğenilme yüzdeleri tablo halinde verilmiştir. 
+
+### XBOX'ta Oynanan Oyunlar 
+
+```{r microsoft}
+m <- data.frame('Oyunlar'=c("Sunset Overdrive","Forza Horizon 4","State of Decay 3", "Microsoft Flight Simulator","Halo 3","Ori and the Will of the Wisps","Gears of War 4") , 'Beğenilme Yüzdeleri'= c(81,92,69,90,94,90,84))
+m
+```
+
+```{r, include=FALSE}
+ort_m <- mean(m$Beğenilme.Yüzdeleri)
+ort_m
+```
+Bakıldığında Microsoft şirketinin 7 oyunun ortalama olarak %85 civarında bir beğenilme yüzdesi vardır denilebilir.
+
+### PLAYSTATION'da Oynanan Oyunlar
+```{r Sony}
+s <- data.frame('Oyunlar'= c("God of War: Ragnarok","Marvel’s Spider-Man (Spider-Man)","Last Of Us Part II", "Ghost of Tsushima","UNCHARTED 4","Detroit: Become Human","Horizon Forbidden West"), 'Beğenilme Yüzdeleri'= c(96,94,92,96,87,78,93))
+s
+```
+
+```{r, include=FALSE}
+ort_s <- mean(s$Beğenilme.Yüzdeleri)
+ort_s
+```
+Sony şirketinin yapmış olduğu 7 oyunu ele aldığımızda ise beğenilme yüzdesinin %90 olduğu görülmektedir.
+Tabi ki sadece bu 14 oyunu karşılaştırarak kesin bir sonuca varmak olanaksızdır.
+
+## Peki Hangisi En İyisi? 
+
+> Puanlamalara "Metacritic" sitesinden ulaşılmıştır. En çok bilinen ve ilgi duyulan oyunlar ele alınarak bu analiz yapılmıştır.
+
+Yaptığımız analize göre XBOX ve PLAYSTATION için özel olarak üretilmiş oyunlar karşılaştırıldığında PLAYSTATION için özel çıkan oyunların genel olarak daha çok beğeni aldığı görülüyor. Dolayısıyla Sony şirketi de burada Microsoft'u geçiyor denilebilir.
+
+
